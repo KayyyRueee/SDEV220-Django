@@ -1,4 +1,8 @@
-from django.http import HttpResponse
+from django.shortcuts import render
 
 def post_list(request):
-    return HttpResponse("Hello, world!")
+    posts = [
+        {"title": "First post", "text": "Hello world!"},
+        {"title": "Second post", "text": "This is my second post"},
+    ]
+    return render(request, 'blog/post_list.html', {'posts': posts})
