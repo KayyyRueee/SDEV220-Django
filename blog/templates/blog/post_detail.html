@@ -9,7 +9,9 @@
     {% else %}
         <aside class="actions">
             <a class="btn btn-secondary"
-                 href="{% url 'post_publish' pk=post.pk %}">Publish</a>
+                href="{% url 'post_publish' pk=post.pk %}">Publish</a>
+            <a class="btn btn-secondary"
+                href="{% url 'post_edit' pk=post.pk %}">Edit</a>
             <a class="btn btn-danger"
                 href="{% url 'post_remove' pk=post.pk %}">Delete</a>
         </aside>

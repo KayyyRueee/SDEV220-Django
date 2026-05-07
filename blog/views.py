@@ -3,6 +3,7 @@ from django.utils import timezone
 from .models import Post
 from .forms import PostForm
 from django.contrib.auth.decorators import login_required      #makes it so only logged in users can create, edit, publish, or delete posts
+from django.http import HttpResponseForbidden
 
 from django.shortcuts import render, get_object_or_404, redirect
 
@@ -44,6 +45,27 @@ def post_draft_list(request):
         'blog/post_draft_list.html',
         {'posts': posts}
     )
+
+@login_required
+def post_edit(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+
+    if post.author != request.user:
+        return HttpResponseForbidden("You cannot edit this post.")
+
+    if request.method == "POST":
+        form = PostForm(request.POST, instance=post)
+
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            return redirect('post_detail', pk=post.pk)
+
+    else:
+        form = PostForm(instance=post)
+
+    return render(request, 'blog/post_edit.html', {'form': form})
 
 @login_required
 def post_publish(request, pk):
