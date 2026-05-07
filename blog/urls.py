@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from blog import views as blog_views
 
 urlpatterns = [
     path('', views.post_list, name='post_list'),   # homepage
@@ -10,5 +11,5 @@ urlpatterns = [
     path('post/<int:pk>/publish/', views.post_publish, name='post_publish'), #publish a draft
     path('post/<int:pk>/remove/', views.post_remove, name='post_remove'), #delete
     path('accounts/profile/', views.profile, name='profile'), #profiles
-    path('accounts/register/', views.register, name='register'),
+    path('accounts/register/', blog_views.register, name='register'),
 ]

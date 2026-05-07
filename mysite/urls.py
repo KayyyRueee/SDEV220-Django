@@ -6,6 +6,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
     path('accounts/login/', views.LoginView.as_view(), name='login'),
-    path('accounts/register/', views.register, name='register'),
+    path('accounts/logout/', views.LogoutView.as_view(next_page='/'), name='logout'),
     
 ]
