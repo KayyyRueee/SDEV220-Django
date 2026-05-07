@@ -1,0 +1,19 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+  <h2>Register</h2>
+
+  {% if error %}
+    <p style="color:red;">{{ error }}</p>
+  {% endif %}
+
+  <form method="post">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <p>Company Code:<input type="text" name="company_code" required></p>
+
+    <button type="submit">Sign up</button>
+  </form>
+{% endblock %}
